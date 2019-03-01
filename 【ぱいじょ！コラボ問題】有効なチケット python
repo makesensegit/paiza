@@ -1,0 +1,24 @@
+import re
+def insert_string_to_base(target_string, insert_point, insert_string):
+    return target_string[:insert_point] + insert_string + target_string[insert_point:]
+N=int(input())
+word = input()
+str=["a"]*N
+for i in range(N):
+    str[i]=input()
+    
+for num in range(N):
+    cnt=0
+    if word in str[num]:
+        print("valid")
+        cnt=1
+        continue
+    for ae in range(len(str[num])):
+        ticket_word=insert_string_to_base(word,ae,".")
+        mac=re.search(ticket_word,str[num])
+        if mac != None:
+            print("valid")
+            cnt=1
+            break
+    if cnt == 0:
+        print("invalid")
