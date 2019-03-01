@@ -1,0 +1,28 @@
+## うなぎの蒲焼き paiza Aランク
+import itertools
+d,n= (int(p) for p in input().split())
+ad=[]
+bd=[]
+
+for i in range(n):
+    ad.append(0) 
+    ad[i]=int(input())
+    bd.append(-ad[i])   
+
+c=ad+bd
+
+for p in itertools.permutations(c):
+    total=0
+    for k in range(2*n):
+        total=total+p[k]
+        if abs(total) > d:
+            break
+    if total==0:
+        RL=""
+        for l in range(n):
+            if p[l] > 0: 
+                RL=RL+"R"
+            elif p[l] < 0:
+                RL=RL+"L"
+        print(RL)
+        break
