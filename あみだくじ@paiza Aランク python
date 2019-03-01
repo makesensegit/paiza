@@ -1,0 +1,53 @@
+#あみだくじ@paiza Aランク
+ANS=1
+L,n,m= (int(p) for p in input().split())
+a=[]
+b=[]
+c=[]
+for i in range(m):
+    a.append(0) 
+    b.append(0)
+    c.append(0)
+    a[i],b[i],c[i]=(int(kx) for kx in input().split())
+
+MAX_B1=0
+i_MAXB1=0
+for i in range(m):
+    if a[i]==ANS:
+        if MAX_B1 < b[i]:
+            MAXB1 = b[i]
+            i_MAXB1=i
+            tempC1=c[i]
+        ANS=2
+
+MAX_C1=0
+MAX_B2=0
+temp_MAX=tempC1
+temp_MAX_old=0
+minB=10000
+minC=10000
+
+
+if i_MAXB1!=0:   
+    while True:
+        print(ANS)
+        temp_MAX_old=temp_MAX
+        for i in range(m):
+            if a[i]==ANS-1:
+                if minC > c[i]:
+                    minC = c[i]
+                if MAX_C1 < c[i] and MAX_C1 < temp_MAX:
+                    MAX_C1=c[i]
+            if a[i]==ANS:
+                if minB > b[i]:
+                    minB = b[i]
+                if MAX_B2 < c[i] and MAX_B2 < temp_MAX:
+                    MAX_B2 = b[i]
+            if MAX_B2 < MAX_C1 and MAX_C1 < temp_MAX:
+                ANS=ANS-1
+                temp_MAX=MAX_C1
+            if MAX_B2 > MAX_C1 and MAX_B2 < temp_MAX:
+                ANS=ANS+1
+                temp_MAX=MAX_B2
+        if temp_MAX == min(minB,minC):
+            break
